@@ -21,10 +21,9 @@ class ClearLaggCommand extends Command implements PluginIdentifiableCommand {
   }
 
   public function execute(CommandSender $sender, $alias, array $args) {
-    if(!$this->testPermission($sender)) {
-      return false;
+    if ($sender->hasPermission("clearlagg")){
+      $sender->sendMessage("Removed " . ($d = $this->getPlugin()->removeMobs()) . " mob" . ($d == 1 ? "" : "s") . " and " . ($d = $this->getPlugin()->removeEntities()) . " entit" . ($d == 1 ? "y" : "ies") . ".");
+      return true;
     }
-    $sender->sendMessage("Removed " . ($d = $this->getPlugin()->removeMobs()) . " mob" . ($d == 1 ? "" : "s") . " and " . ($d = $this->getPlugin()->removeEntities()) . " entit" . ($d == 1 ? "y" : "ies") . ".");
-    return true;
   }
 }
